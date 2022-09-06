@@ -6,7 +6,7 @@ use std::env;
 // Create a function that will return the index.html file.
 fn index(_req: &HttpRequest) -> impl Responder {
     // Open the index.html file.
-    // The index.html file should be placed in the same directory as the Rust file.
+    // The index.html file should be placed in the /static directory.
     fs::NamedFile::open("static/index.html").unwrap()
 }
 
@@ -14,7 +14,7 @@ fn main() {
     // Get the port number from the environment variable.
     let port = env::var("PORT")
         // If the environment variable is not set, use port 3000.
-        .unwrap_or_else(|_| "3000".to_string())
+        .unwrap_or_else(|_| "3000".to_string()) // Has something to do with monads lol
         // Parse the port number as a number.
         .parse()
         // If the port number is not a number, panic.
@@ -24,19 +24,14 @@ fn main() {
     server::new(|| {
         // Create a new application.
         App::new()
-            // Create a new resource.
+            // Create a new resource and route
+            // Use the index function to return index.html
             .resource("/", |r| r.f(index))
-                // Create a new route.
     })
-                    // Use the index function to return the index.html file.
+     // Bind the server to the port.
     .bind(("0.0.0.0", port))
-                // End the route.
+     // If the server can not bind to the port, panic.
     .expect("Can not bind to port 8000")
-            // End the resource.
+    // Run that sth homie.
     .run();
-        // End the application.
 }
-    // End the server.
-    // Bind the server to the port.
-    // If the server can not bind to the port, panic.
-    // Run the server.
