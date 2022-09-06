@@ -2,7 +2,7 @@
 name = "e-accy"
 version = "0.1.0"
 authors = ["Israel Gonzalez-Brooks","Eric Kidd <git@randomhacks.net>"]
-edition = "2022"
+edition = "2021"
 
 [dependencies]
 actix-web = "0.7"
