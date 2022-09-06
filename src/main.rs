@@ -7,7 +7,7 @@ use std::env;
 fn index(_req: &HttpRequest) -> impl Responder {
     // Open the index.html file.
     // The index.html file should be placed in the same directory as the Rust file.
-    fs::NamedFile::open("index.html").unwrap()
+    fs::NamedFile::open("static/index.html").unwrap()
 }
 
 fn main() {
