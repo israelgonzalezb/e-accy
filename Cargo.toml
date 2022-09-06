@@ -1,8 +1,8 @@
 [package]
-name = "rust-buildpack-example-actix"
+name = "e-accy"
 version = "0.1.0"
-authors = ["Eric Kidd <git@randomhacks.net>"]
-edition = "2018"
+authors = ["Israel Gonzalez-Brooks","Eric Kidd <git@randomhacks.net>"]
+edition = "2022"
 
 [dependencies]
 actix-web = "0.7"
