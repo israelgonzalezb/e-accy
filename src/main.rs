@@ -5,12 +5,11 @@
 //!
 //! [actix]: https://actix.rs/docs/
 
-use actix_web::{server, App, HttpRequest, Responder};
+use actix_web::{server, App, HttpRequest, Responder, fs};
 use std::env;
 
-fn greet(req: &HttpRequest) -> impl Responder {
-    let to = req.match_info().get("name").unwrap_or("World");
-    format!("Hello {}!", to)
+fn index(_req: &HttpRequest) -> impl Responder {
+    fs::NamedFile::open("index.html")
 }
 
 fn main() {
@@ -23,8 +22,7 @@ fn main() {
     // Start a server, configuring the resources to serve.
     server::new(|| {
         App::new()
-            .resource("/", |r| r.f(greet))
-            .resource("/{name}", |r| r.f(greet))
+            .resource("/", |r| r.f(index))
     })
     .bind(("0.0.0.0", port))
     .expect("Can not bind to port 8000")
