@@ -1,2 +1,2 @@
-web: ./target/release/rust-buildpack-example-actix
+web: ./target/release/e-accy
 
