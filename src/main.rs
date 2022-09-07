@@ -10,7 +10,7 @@ fn respond(req: &HttpRequest) -> impl Responder {
     let to = req.match_info().get("name").unwrap_or("index");
     
     // Open the corresponding html file if it exists, otherwise serve null.html
-    fs::NamedFile::open(format!("static/{}.html", to)).unwrap_or_else(fs::NamedFile::open("static/null.html").unwrap());
+    fs::NamedFile::open(format!("static/{}.html", to)).unwrap_or_else(|_| fs::NamedFile::open("static/null.html").unwrap());
 }
 
 fn main() {
