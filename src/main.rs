@@ -3,11 +3,14 @@ use actix_web::{server, App, HttpRequest, Responder, fs};
 // Import the std::env crate.
 use std::env;
 
-// Create a function that will return the index.html file.
-fn index(_req: &HttpRequest) -> impl Responder {
-    // Open the index.html file.
-    // The index.html file should be placed in the /static directory.
-    fs::NamedFile::open("static/index.html").unwrap()
+// Create a function that will return a requested file from the /static dir
+fn respond(_req: &HttpRequest) -> impl Responder {
+    
+    // Get the /{name} file, otherwise get index
+    let to = req.match_info().get("name").unwrap_or("index");
+    
+    // Open the corresponding html file if it exists, otherwise serve null.html
+    fs::NamedFile::open(format!("static/{}.html", to)).unwrap_or("static/null.html");
 }
 
 fn main() {
