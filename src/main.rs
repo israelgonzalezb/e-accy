@@ -28,8 +28,8 @@ fn main() {
         // Create a new application.
         App::new()
             // Create a new resource and route
-            // Use the index function to return index.html
-            .resource("/", |r| r.f(index))
+            // Use the respond function to return a file
+            .resource("/", |r| r.f(respond))
     })
      // Bind the server to the port.
     .bind(("0.0.0.0", port))
