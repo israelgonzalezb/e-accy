@@ -4,7 +4,7 @@ use actix_web::{server, App, HttpRequest, Responder, fs};
 use std::env;
 
 // Create a function that will return a requested file from the /static dir
-fn respond(_req: &HttpRequest) -> impl Responder {
+fn respond(req: &HttpRequest) -> impl Responder {
     
     // Get the /{name} file, otherwise get index
     let to = req.match_info().get("name").unwrap_or("index");
