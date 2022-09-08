@@ -1,10 +1,11 @@
 // Import the actix_web crate.
-use actix_web::{server, App, HttpRequest, Responder, fs, Error, Path };
+use actix_web::{server, App, HttpRequest, Responder, fs, Path };
 // Import the std::env crate.
 use std::env;
 
-fn respond(req: &HttpRequest) -> Result<fs::NamedFile, Error> {
-    let path = req.match_info().get("name").unwrap_or("index").to_string();
+#[get("/{file}.html")]
+fn respond(req: &HttpRequest) -> Result<fs::NamedFile> {
+    let path = req.match_info().get("file").unwrap_or("index").to_string();
     let path = Path::new(&path);
     let path = path.to_str().unwrap();
     let file_requested = format!("static/{}.html", path); // Fix this
