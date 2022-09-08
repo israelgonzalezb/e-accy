@@ -1,14 +1,9 @@
-// Import the actix_web crate.
-use actix_web::{server, App, HttpRequest, Responder, fs};
-// Import the std::env crate.
+use actix_web::{server, App, HttpRequest, Responder, fs, Error, HttpResponse, Path, Result};
 use std::env;
 
-fn respond(req: &HttpRequest) -> Result<fs::NamedFile, Error> {
-    let path = req.match_info().get("name").unwrap_or("index").to_string();
-    let path = Path::new(&path);
-    let path = path.to_str().unwrap();
-    let file_requested = format!("static/{}.html", path); // Fix this
-    fs::NamedFile::open(file_requested) // This is risky too
+fn respond(path: Path<String>) -> Result<fs::NamedFile> {
+    let file_requested = format!("static/{}", path.into_inner());
+    fs::NamedFile::open(file_requested).map_err(|_| Error::from(HttpResponse::NotFound().body("File not found")))
 }
 
 fn main() {
@@ -16,7 +11,7 @@ fn main() {
 
     server::new(|| {
         App::new()
-            .resource("/", |r| r.f(respond))
+            .resource("/{name:.*\\.html}", |r| r.f(respond)) // Serve only files with .html extension
     })
     .bind(("0.0.0.0", port))
     .expect("Can not bind to port 8000")
