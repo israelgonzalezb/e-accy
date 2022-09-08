@@ -16,7 +16,7 @@ fn main() {
 
     server::new(|| {
         App::new()
-            .resource("/", |r| r.f(respond))
+            .resource("/*", |r| r.f(respond))
     })
     .bind(("0.0.0.0", port))
     .expect("Can not bind to port 8000")
