@@ -3,7 +3,7 @@ use std::env;
 
 fn respond(path: Path<String>) -> Result<fs::NamedFile> {
     let file_requested = format!("static/{}", path.into_inner());
-    fs::NamedFile::open(file_requested).map_err(|_| Error::from(HttpResponse::NotFound().body("File not found").into()))
+    fs::NamedFile::open(file_requested).map_err(|_| ResponseError::from(HttpResponse::NotFound().body("File not found").into()))
 }
 
 fn main() {
