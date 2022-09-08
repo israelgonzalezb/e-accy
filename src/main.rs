@@ -1,5 +1,5 @@
 // Import the actix_web crate.
-use actix_web::{server, App, HttpRequest, Responder, fs};
+use actix_web::{server, App, HttpRequest, Responder, fs, Error, Path };
 // Import the std::env crate.
 use std::env;
 
