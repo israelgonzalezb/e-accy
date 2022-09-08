@@ -1,9 +1,9 @@
-use actix_web::{server, App, HttpRequest, Responder, fs, Error, HttpResponse, Path, Result};
+use actix_web::{server, App, HttpRequest, Responder, fs, Error, HttpResponse, Path, Result, ResponseError};
 use std::env;
 
 fn respond(path: Path<String>) -> Result<fs::NamedFile> {
     let file_requested = format!("static/{}", path.into_inner());
-    fs::NamedFile::open(file_requested).map_err(|_| Error::from(HttpResponse::NotFound().body("File not found")))
+    fs::NamedFile::open(file_requested).map_err(|_| Error::from(HttpResponse::NotFound().body("File not found").into()))
 }
 
 fn main() {
