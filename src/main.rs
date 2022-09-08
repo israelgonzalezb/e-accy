@@ -6,11 +6,13 @@ use std::env;
 // Create a function that will return a requested file from the /static dir
 fn respond(req: &HttpRequest) -> impl Responder {
     
-    // Get the /{to} file, otherwise get /index if / is requested
-    let to = req.match_info().get("to").unwrap_or("index");
+    // Get the /{to} str
+    let to = req.match_info().get("name").unwrap()
+    let path = if to.is_empty() { "/" } else { path };
+    let fileRequested = format!("static/{}.html", path)
     
     // Open the corresponding html file if it exists, otherwise serve null.html
-    fs::NamedFile::open(format!("static/{}.html", to)).unwrap_or_else(|_| fs::NamedFile::open("static/null.html").unwrap())
+    fs::NamedFile::open(fileRequested).unwrap())
 }
 
 fn main() {
