@@ -5,7 +5,7 @@ use std::env;
 
 #[get("/{file}.html")]
 fn respond(req: &HttpRequest) -> Result<fs::NamedFile, E> {
-    let path = req.match_info().get("file").unwrap_or("index").to_string();
+    let path = req.path(); // .unwrap_or("index")
     let path = Path::new(&path);
     let path = path.to_str().unwrap();
     let file_requested = format!("static/{}.html", path); // Fix this
