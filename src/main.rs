@@ -3,7 +3,6 @@ use actix_web::{server, App, HttpRequest, Responder, fs, Path };
 // Import the std::env crate.
 use std::env;
 
-#[get("/{file}.html")]
 fn respond(req: &HttpRequest) -> Result<fs::NamedFile, E> {
     let path = req.path(); // .unwrap_or("index")
     // let path = Path::new(&path);
