@@ -1,6 +1,6 @@
 use actix_files as fs;
 use actix_web::{App, HttpServer};
-use std::env
+use std::env;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
