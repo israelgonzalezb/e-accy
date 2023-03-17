@@ -1,8 +1,9 @@
 [package]
-name = "e-accy"
+name = "e-ex"
 version = "0.1.0"
-authors = ["Israel Gonzalez-Brooks","Eric Kidd <git@randomhacks.net>"]
-edition = "2018"
+authors = ["Israel Gonzalez-Brooks"]
+edition = "2021"
 
 [dependencies]
-actix-web = "0.7"
+actix-files = "0.6.2"
+actix-web = "4"
